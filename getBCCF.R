@@ -64,7 +64,7 @@ getRestCF = function(ticker)
       pg
   })
   # remove empty lists - removes pages without content
-  pg = pg[lapply(pg, length)>0]
+  pg = pg[lapply(as.list(1:length(pg)), function(ii) pg[[ii]] %>% html_nodes("table") %>% length) > 0]
   # extract tables
   df = lapply(as.list(1:length(pg)), function(ii){
     
